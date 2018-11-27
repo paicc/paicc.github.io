@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.5.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.5.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.5.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.5.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="最近經歷了殘酷的疲勞面試，從中學習了很多，不管是表達方面還是個人機處方面都有所進步。其中，在面試不乏各式的考題包含C語言、作業系統概念和計組。就幫自己做個紀錄也順便分享一下，等之後有公司了再分享面試心得。">
+<meta name="keywords" content="C language,interview">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面試考題-C語言">
+<meta property="og:url" content="http://yoursite.com/2018/09/29/面試考題-C語言/index.html">
+<meta property="og:site_name" content="Never Forget">
+<meta property="og:description" content="最近經歷了殘酷的疲勞面試，從中學習了很多，不管是表達方面還是個人機處方面都有所進步。其中，在面試不乏各式的考題包含C語言、作業系統概念和計組。就幫自己做個紀錄也順便分享一下，等之後有公司了再分享面試心得。">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-11-27T15:09:12.860Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="面試考題-C語言">
+<meta name="twitter:description" content="最近經歷了殘酷的疲勞面試，從中學習了很多，不管是表達方面還是個人機處方面都有所進步。其中，在面試不乏各式的考題包含C語言、作業系統概念和計組。就幫自己做個紀錄也順便分享一下，等之後有公司了再分享面試心得。">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/09/29/面試考題-C語言/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>面試考題-C語言 | Never Forget</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Never Forget</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/29/面試考題-C語言/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alger Pai">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Never Forget">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">面試考題-C語言
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-09-29 16:08:16" itemprop="dateCreated datePublished" datetime="2018-09-29T16:08:16+08:00">2018-09-29</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-11-27 23:09:12" itemprop="dateModified" datetime="2018-11-27T23:09:12+08:00">2018-11-27</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Symbols count in article: </span>
+                
+                <span title="Symbols count in article">3.1k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">3 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>最近經歷了殘酷的疲勞面試，從中學習了很多，不管是表達方面還是個人機處方面都有所進步。其中，在面試不乏各式的考題包含C語言、作業系統概念和計組。就幫自己做個紀錄也順便分享一下，等之後有公司了再分享面試心得。<br><a id="more"></a></p>
+<h2 id="C語言考題"><a href="#C語言考題" class="headerlink" title="C語言考題"></a>C語言考題</h2><h3 id="指標"><a href="#指標" class="headerlink" title="指標"></a>指標</h3><ol>
+<li><p>The content of array a?</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int a[ ]=&#123;6,7,8,9,10&#125;;</span><br><span class="line">int *p= a;</span><br><span class="line">*(p++) +=123;</span><br><span class="line">*(++p) +=123;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>請問輸出為何?</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">char i[ ] = “Hello”;</span><br><span class="line">char *p = 1;</span><br><span class="line">int n = 10;</span><br><span class="line">printf(“%d %d %d”, sizeof(i), sizeof(p), 		sizeof(n));</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>請問輸出為何?</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">int main()&#123;</span><br><span class="line">	int a[] =&#123;1,2,3,4,5,6&#125;;</span><br><span class="line">	int *ptr = (int*) (&amp;a+1);</span><br><span class="line">	printf(&quot;%d&quot;, *(ptr-1));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>請問輸出為何?</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">int main()&#123;</span><br><span class="line">	int arr[] = &#123;10,20,30,40,50&#125;;</span><br><span class="line">	int *ptr1 = arr;</span><br><span class="line">	int *ptr2 = arr + 5;</span><br><span class="line">	printf(&quot;%d&quot;, (ptr2-ptr1));</span><br><span class="line">	printf(&quot;%d&quot;, (char*)ptr2 - (char*)ptr1);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>請問輸出為何?</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">int main()&#123;</span><br><span class="line">	int arr1[] = &#123;10,20&#125;;</span><br><span class="line">	int arr2[] = &#123;10,20&#125;;</span><br><span class="line">	int arr3[] = &#123;10,20&#125;;</span><br><span class="line">	int *p = arr1;</span><br><span class="line">	int *q = arr2;</span><br><span class="line">	int *r = arr3;</span><br><span class="line">	++*p;</span><br><span class="line">	*q++;</span><br><span class="line">	*++r;</span><br><span class="line">	printf(&quot;%d %d %d&quot;, arr1[0], arr1[1], *p);</span><br><span class="line">	printf(&quot;%d %d %d&quot;, arr2[0], arr2[1], *q);</span><br><span class="line">	printf(&quot;%d %d %d&quot;, arr3[0], arr3[1], *r);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>請問輸出為何?</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">void f(int *p, int *q)&#123;</span><br><span class="line">	p = q;</span><br><span class="line">	*p = 2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int i=0, j=1;</span><br><span class="line">int main()&#123;</span><br><span class="line">	f(&amp;i, &amp;j);</span><br><span class="line">	printf(&quot;%d %d\n&quot;, i, j);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>請問輸出為何?</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">int main()&#123;</span><br><span class="line">	char s[ ]=&quot;0113256&quot;;</span><br><span class="line">	char *p = s;</span><br><span class="line">	</span><br><span class="line">	printf(&quot;%c&quot;, *p++);</span><br><span class="line">	printf(&quot;%c&quot;, *(p++));</span><br><span class="line">	printf(&quot;%c&quot;, (*p)++);</span><br><span class="line">	printf(&quot;%c&quot;, *++p);</span><br><span class="line">	printf(&quot;%c&quot;, *(++p));</span><br><span class="line">	printf(&quot;%c&quot;, ++*p);</span><br><span class="line">	printf(&quot;%c&quot;, ++(*p));</span><br><span class="line">	printf(&quot;\n&quot;);</span><br><span class="line">	printf(&quot;%s&quot;,s);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>請問輸出為何?</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">int main()&#123;</span><br><span class="line">	int ref[]=&#123;8,4,0,2&#125;;</span><br><span class="line">	int *ptr;</span><br><span class="line">	int index;</span><br><span class="line">	for(index=0, ptr=ref; index&lt;2; index++,ptr++)</span><br><span class="line">		printf(&quot;%d %d\n&quot;, ref[index], *ptr);</span><br><span class="line">	(*ptr++);</span><br><span class="line">	printf(&quot;%d %d\n&quot;, ref[index], *ptr);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="陣列"><a href="#陣列" class="headerlink" title="陣列"></a>陣列</h3><ol>
+<li><p>請問輸出為何?</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ine main() &#123;</span><br><span class="line">	char *str[ ][2] =</span><br><span class="line">		&#123; &quot;professor&quot;, &quot;Justin&quot; ,</span><br><span class="line">		  &quot;teacher&quot;, &quot;Momor&quot; ,</span><br><span class="line">		  &quot;student&quot;, &quot;Caterpillar&quot;&#125;;</span><br><span class="line"></span><br><span class="line">	char str2[3][10] = &#123;&quot;professor&quot;, &quot;Justin&quot;, &quot;etc&quot;&#125;;</span><br><span class="line">	printf(&quot;%s\n&quot;, str[1][1]);</span><br><span class="line">	printf(&quot;%c\n&quot;,str2[1][1]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>what is final value of cnt?</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int cnt = 10;</span><br><span class="line">const char *pc = &quot;welcome&quot;;</span><br><span class="line">while(*pc++)</span><br><span class="line">	cnt++;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="實作題"><a href="#實作題" class="headerlink" title="實作題"></a>實作題</h3><ol>
+<li><p>Write a function that can calculate?<br><code>1*2 + 2**3 + …… + (n-1)*n</code></p>
+</li>
+<li><p>寫一個string compare的function。相同return 0，不同return 1</p>
+</li>
+<li><p>寫一個sort演算法</p>
+</li>
+<li><p>在一個數值中計算幾個bit為1</p>
+</li>
+<li><p>將一個數值的奇偶bit互換</p>
+</li>
+<li><p>將一個字串reverse</p>
+</li>
+<li><p>給一個連續數列，找出連續最長的1bit</p>
+</li>
+</ol>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><ol>
+<li><p>請問輸出為何？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sizeof(byte)? sizeof(float)? sizeof(int)? sizeof(short)? sizeof(short)?</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>請問輸出為何?</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">union StateMachine &#123;</span><br><span class="line">    char character;</span><br><span class="line">    int number;</span><br><span class="line">    char *str;&#125;;</span><br><span class="line"></span><br><span class="line">int main(void) &#123;</span><br><span class="line">    union StateMachine machine;</span><br><span class="line">    machine.number = 1;</span><br><span class="line"></span><br><span class="line">    printf(&quot;sizeof: %lu\n&quot;, sizeof(machine));</span><br><span class="line">    printf(&quot;number: %d\n&quot;, machine.number);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Write a function which can return the bit content form.<br>給一個整數變數a<br>(1)設置a的bit3<br>(2)清除a的bit3</p>
+</li>
+<li><p>請問v為何?</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">unsign long v1 = 0x00001111;</span><br><span class="line">unsign long v2 = 0x00001202;</span><br><span class="line">unsign long v;</span><br><span class="line">v = v1 &amp; (~v2);</span><br><span class="line">v = v1 | v2;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C-language/" rel="tag"># C language</a>
+          
+            <a href="/tags/interview/" rel="tag"># interview</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/29/面試考題-作業系統/" rel="prev" title="面試考題-作業系統">
+                面試考題-作業系統 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Alger Pai</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#C語言考題"><span class="nav-number">1.</span> <span class="nav-text">C語言考題</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#指標"><span class="nav-number">1.1.</span> <span class="nav-text">指標</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#陣列"><span class="nav-number">1.2.</span> <span class="nav-text">陣列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#實作題"><span class="nav-number">1.3.</span> <span class="nav-text">實作題</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他"><span class="nav-number">1.4.</span> <span class="nav-text">其他</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Alger Pai</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="Symbols count total">8k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="Reading time total">7 mins.</span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v6.5.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.5.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
